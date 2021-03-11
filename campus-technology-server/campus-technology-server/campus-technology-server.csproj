@@ -5,4 +5,8 @@
     <RootNamespace>campus_technology_server</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.4" />
+  </ItemGroup>
+
 </Project>
