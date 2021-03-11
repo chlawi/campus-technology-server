@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
-namespace campus_technology_server.Controllers
+namespace AppleAppRequest.Controllers
 {
     [Route("v1/apple-app-requests")]
     [ApiController]
