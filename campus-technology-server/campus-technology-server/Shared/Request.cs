@@ -3,7 +3,8 @@
 namespace Shared
 {
     abstract public class Request : Entity
-    {        public DateTime Date { get; set; }
+    {
+        public DateTime Date { get; set; }
         public string Requester { get; set; }
         public string Approver { get; set; }
         public StatusType Status { get; set; }
