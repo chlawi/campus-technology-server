@@ -1,4 +1,4 @@
-﻿using campus_technology_server.Shared;
+﻿using Shared;
 
 namespace AppleAppRequest.Models
 {
