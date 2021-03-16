@@ -10,11 +10,15 @@ namespace campus_technology_server.AppleAppRequest
 {
     public class AppleAppRequestContext : DbContext
     {
+        public AppleAppRequestContext(DbContextOptions<AppleAppRequestContext> options)
+             : base(options)
+        {
+
+        }
         public DbSet<AppleAppRequestModel> AppleAppRequests { get; set; }
         public DbSet<AppleAppApplicationModel> AppleAppApplications { get; set; }
         public DbSet<AppleAppDeviceModel> AppleAppDevices { get; set; }
         public DbSet<AppleAppApproverModel> AppleAppApprovers { get; set; }
         public DbSet<AppleAppRejectReasonModel> AppleAppRejectReasons { get; set; }
-
     }
 }
