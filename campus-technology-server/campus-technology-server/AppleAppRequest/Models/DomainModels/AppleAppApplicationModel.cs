@@ -9,11 +9,10 @@ namespace AppleAppRequest.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Vendor { get; set; }
         public int? Quantity { get; set; }
         public decimal? UnitPrice { get; set; }
-        public List<AppleAppRequestModel> AppleAppRequest { get; set; } = new List<AppleAppRequestModel>();
     }
 }
