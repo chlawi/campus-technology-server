@@ -7,9 +7,7 @@ namespace AppleAppRequest.Models
 {
     public class AppleAppApplicationModel : Entity
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Vendor { get; set; }
         public int? Quantity { get; set; }
