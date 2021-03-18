@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Shared;
 
 namespace AppleAppRequest.Models
 {
-    public class AppleAppRequestedApplicationModel
+    public class AppleAppRequestedApplicationModel : Entity
     {
         public int Id { get; set; }
         public string Name { get; set; }
