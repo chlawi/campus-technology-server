@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using campus_technology_server.AppleAppRequest;
 
 namespace campus_technology_server.Migrations
 {
     [DbContext(typeof(AppleAppRequestContext))]
-    partial class AppleAppRequestContextModelSnapshot : ModelSnapshot
+    [Migration("20210318125226_added-string-array-fields")]
+    partial class addedstringarrayfields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,9 +132,6 @@ namespace campus_technology_server.Migrations
 
                     b.Property<string>("AssetTags")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("CompletionDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");

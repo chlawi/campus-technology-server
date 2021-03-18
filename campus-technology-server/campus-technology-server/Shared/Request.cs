@@ -4,11 +4,11 @@ namespace Shared
 {
     abstract public class Request : Entity
     {
-        public DateTime Date { get; set; }
-        public string Requester { get; set; }
-        public string Approver { get; set; }
+        public string RequesterId { get; set; }
+        public int ApproverId { get; set; }
         public StatusType Status { get; set; }
-        public string? Provider { get; set; }
+        public DateTime Date { get; set; } = DateTime.Now;
+        public string ProviderId { get; set; }
     }
 
     public enum StatusType
