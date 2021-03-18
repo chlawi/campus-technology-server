@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace my_playground_project.Controllers
 {
-    [Route("v1/apple-app-reject-reason")]
+    [Route("v1/apple-app-reject-reasons")]
     [ApiController]
     public class AppleAppRejectReasonController : ControllerBase
     {
