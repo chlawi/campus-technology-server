@@ -12,7 +12,6 @@ namespace AppleAppRequest.Models
         public AppleAppRequestedDeviceProfile()
         {
             CreateMap<AppleAppRequestedDeviceEditView, AppleAppRequestedDeviceModel>()
-                .ForMember(a => a.ReferenceId, o => o.MapFrom(s => Guid.NewGuid().ToString()))
                 .ReverseMap();
         }
     }

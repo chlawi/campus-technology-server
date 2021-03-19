@@ -12,7 +12,6 @@ namespace AppleAppRequest.Models
         public AppleAppRequestedApplicationProfile()
         {
             CreateMap<AppleAppRequestedApplicationEditView, AppleAppRequestedApplicationModel>()
-                .ForMember(a => a.ReferenceId, o => o.MapFrom(s => Guid.NewGuid().ToString()))
                 .ReverseMap();
         }
     }
