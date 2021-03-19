@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace AppleAppRequest.Models
 {
-    public class AppleAppDeviceProfile : Profile
+    public class AppleAppRequestedDeviceProfile : Profile
     {
-        public AppleAppDeviceProfile()
+        public AppleAppRequestedDeviceProfile()
         {
             CreateMap<AppleAppRequestedDeviceEditView, AppleAppRequestedDeviceModel>()
                 .ReverseMap();
