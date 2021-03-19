@@ -16,7 +16,7 @@ namespace my_playground_project.Controllers
     {
         private readonly AppleAppRequestContext _context;
 
-        public IMapper Mapper { get; }
+        private readonly IMapper Mapper;
 
         public AppleAppRequestController(AppleAppRequestContext context, IMapper mapper)
         {
