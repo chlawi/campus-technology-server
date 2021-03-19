@@ -14,13 +14,13 @@ namespace my_playground_project.Controllers
     [ApiController]
     public class AppleAppRequestController : ControllerBase
     {
-        private readonly AppleAppRequestContext _context;
+        private readonly AppleAppRequestContext context;
 
         private readonly IMapper Mapper;
 
         public AppleAppRequestController(AppleAppRequestContext context, IMapper mapper)
         {
-            _context = context;
+            this.context = context;
             Mapper = mapper;
         }
 
@@ -28,14 +28,14 @@ namespace my_playground_project.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppleAppRequestListView>>> GetAppleAppRequests()
         {
-            return Mapper.Map<AppleAppRequestListView[]>(await _context.AppleAppRequests.Where(request => request.IsActive == true).ToListAsync());
+            return Mapper.Map<AppleAppRequestListView[]>(await this.context.AppleAppRequests.Where(request => request.IsActive == true).ToListAsync());
         }
 
         // GET: api/AppleAppRequest/5
         [HttpGet("{id}")]
         public async Task<ActionResult<AppleAppRequestModel>> GetAppleAppRequestModel(long id)
         {
-            var appleAppRequestModel = await _context.AppleAppRequests.FindAsync(id);
+            var appleAppRequestModel = await this.context.AppleAppRequests.FindAsync(id);
 
             if (appleAppRequestModel == null || appleAppRequestModel.IsActive == false)
             {
@@ -55,11 +55,11 @@ namespace my_playground_project.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(appleAppRequestModel).State = EntityState.Modified;
+            this.context.Entry(appleAppRequestModel).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await this.context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -85,24 +85,24 @@ namespace my_playground_project.Controllers
 
             appleAppRequestView.RequestedApplications.ForEach(requestedApplication =>
             {
-                if (!_context.AppleAppApplications.Any(a => a.Name.ToUpper() == requestedApplication.Name.ToUpper()))
+                if (!this.context.AppleAppApplications.Any(a => a.Name.ToUpper() == requestedApplication.Name.ToUpper()))
                 {
                     var newAppleAppApplication = new AppleAppApplicationModel { Name = requestedApplication.Name, ReferenceId = Guid.NewGuid().ToString() };
-                    _context.AppleAppApplications.Add(newAppleAppApplication);
+                    this.context.AppleAppApplications.Add(newAppleAppApplication);
                 }
             });
 
             appleAppRequestView.RequestedDevices.ForEach(requestedDevice =>
             {
-                if (!_context.AppleAppDevices.Any(d => d.AssetTag.ToUpper() == requestedDevice.AssetTag.ToUpper()))
+                if (!this.context.AppleAppDevices.Any(d => d.AssetTag.ToUpper() == requestedDevice.AssetTag.ToUpper()))
                 {
                     var newAppleAppDevice = new AppleAppDeviceModel { AssetTag = requestedDevice.AssetTag, ReferenceId = Guid.NewGuid().ToString() };
-                    _context.AppleAppDevices.Add(newAppleAppDevice);
+                    this.context.AppleAppDevices.Add(newAppleAppDevice);
                 }
             });
 
-            _context.AppleAppRequests.Add(appleAppRequest);
-            await _context.SaveChangesAsync();
+            this.context.AppleAppRequests.Add(appleAppRequest);
+            await this.context.SaveChangesAsync();
 
             return CreatedAtAction("GetAppleAppRequestModel", new { id = appleAppRequest.Id }, appleAppRequest);
         }
@@ -111,22 +111,22 @@ namespace my_playground_project.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAppleAppRequestModel(long id)
         {
-            var appleAppRequestModel = await _context.AppleAppRequests.FindAsync(id);
+            var appleAppRequestModel = await this.context.AppleAppRequests.FindAsync(id);
             if (appleAppRequestModel == null)
             {
                 return NotFound();
             }
 
             appleAppRequestModel.IsActive = false;
-            _context.AppleAppRequests.Update(appleAppRequestModel);
-            await _context.SaveChangesAsync();
+            this.context.AppleAppRequests.Update(appleAppRequestModel);
+            await this.context.SaveChangesAsync();
 
             return NoContent();
         }
 
         private bool AppleAppRequestModelExists(long id)
         {
-            return _context.AppleAppRequests.Any(e => e.Id == id);
+            return this.context.AppleAppRequests.Any(e => e.Id == id);
         }
     }
 }
