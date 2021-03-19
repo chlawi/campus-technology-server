@@ -26,9 +26,9 @@ namespace my_playground_project.Controllers
 
         // GET: api/AppleAppRequest
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppleAppRequestModel>>> GetAppleAppRequests()
+        public async Task<ActionResult<IEnumerable<AppleAppRequestListView>>> GetAppleAppRequests()
         {
-            return await _context.AppleAppRequests.Where(request => request.IsActive == true).ToListAsync();
+            return Mapper.Map<AppleAppRequestListView[]>(await _context.AppleAppRequests.Where(request => request.IsActive == true).ToListAsync());
         }
 
         // GET: api/AppleAppRequest/5
