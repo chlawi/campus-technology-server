@@ -10,6 +10,7 @@ namespace AppleAppRequest.Models
         public string RequesterId { get; set; }
         public int ApproverId { get; set; }
         public StatusType Status { get; set; }
+        public SubscriptionType SubscriptionType { get; set; }
         public int? ProviderId { get; set; }
         public int? RejectReasonId { get; set; }
         public List<AppleAppRequestedApplicationEditView> RequestedApplications { get; set; }
