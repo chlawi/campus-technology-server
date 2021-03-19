@@ -33,7 +33,13 @@ namespace campus_technology_server
 
             services.AddSingleton<IAppleAppRequestService, AppleAppRequestService>();
 
-            services.AddControllers();
+            services
+                .AddControllers()
+                .AddNewtonsoftJson
+                (
+                    options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
