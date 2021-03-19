@@ -8,6 +8,7 @@ namespace AppleAppRequest.Models
 {
     public class AppleAppRequestedDeviceEditView
     {
+        public int Id { get; set; }
         public string AssetTag { get; set; }
     }
 }
