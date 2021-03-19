@@ -14,6 +14,8 @@ namespace AppleAppRequest.Models
         {
             CreateMap<AppleAppRequestEditView, AppleAppRequestModel>()
                 .ReverseMap();
+
+            CreateMap<AppleAppRequestModel, AppleAppRequestListView>();
         }
         
     }
