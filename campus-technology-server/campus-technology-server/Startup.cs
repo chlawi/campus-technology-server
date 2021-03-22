@@ -14,11 +14,14 @@ namespace campus_technology_server
     {
         //private readonly IConfiguration configuration;
 
+
         public Startup(IConfiguration configuration)
         {
             //this.configuration = configuration;
             Configuration = configuration;
         }
+
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
         public IConfiguration Configuration { get; }
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -32,6 +35,9 @@ namespace campus_technology_server
                  .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
 
             services.AddSingleton<IAppleAppRequestService, AppleAppRequestService>();
+
+            //services.AddCors(options => { options.AddPolicy("AllowAllWithCredentials", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials()); });
+            services.AddCors(options => { options.AddPolicy("AllowAllWithCredentials", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()); });
 
             services
                 .AddControllers()
@@ -55,6 +61,8 @@ namespace campus_technology_server
             {
                 app.UseHsts();
             }
+
+            app.UseCors("AllowAllWithCredentials");
 
             app.UseHttpsRedirection();
 
