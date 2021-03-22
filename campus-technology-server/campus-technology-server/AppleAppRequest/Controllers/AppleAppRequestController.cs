@@ -33,7 +33,7 @@ namespace my_playground_project.Controllers
 
         // GET: api/AppleAppRequest/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<AppleAppRequestModel>> GetAppleAppRequestModel(long id)
+        public async Task<ActionResult<AppleAppRequestModel>> GetAppleAppRequestModel(int id)
         {
             var appleAppRequestModel = await this.context.AppleAppRequests.FindAsync(id);
 
