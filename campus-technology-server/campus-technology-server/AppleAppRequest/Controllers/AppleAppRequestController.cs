@@ -35,13 +35,17 @@ namespace my_playground_project.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AppleAppRequestModel>> GetAppleAppRequestModel(int id)
         {
-            var appleAppRequestModel = await this.context.AppleAppRequests.FindAsync(id);
+            //var appleAppRequestModel = await this.context.AppleAppRequests.FindAsync(id);
+            //this.context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            var appleAppRequestModel = await this.context.AppleAppRequests.Include(request => request.RequestedApplications).Include(request => request.RequestedDevices).FirstOrDefaultAsync(request  => request.Id == id);
 
             if (appleAppRequestModel == null || appleAppRequestModel.IsActive == false)
             {
                 return NotFound();
             }
 
+            //await this.context.Entry(appleAppRequestModel).Collection(request => request.RequestedDevices).EntityEntry.Collection(request => request.RequestedApplications).LoadAsync();
+            //await this.context.Entry(appleAppRequestModel).Collection(request => request.RequestedDevices).LoadAsync();
             return appleAppRequestModel;
         }
 
