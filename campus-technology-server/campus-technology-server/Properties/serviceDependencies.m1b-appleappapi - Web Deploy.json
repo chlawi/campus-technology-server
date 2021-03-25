@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/m1b-campus-technology-dev/databases/AppleApp",
+      "type": "mssql.azure",
+      "connectionId": "AppleApp",
+      "secretStore": "AzureAppSettings"
+    }
+  }
+}

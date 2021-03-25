@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>campus_technology_server</RootNamespace>
+    <UserSecretsId>44db4d79-3b1a-48a9-9b5c-6d860ee455ec</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
