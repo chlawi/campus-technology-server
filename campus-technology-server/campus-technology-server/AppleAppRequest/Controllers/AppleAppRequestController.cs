@@ -37,7 +37,7 @@ namespace my_playground_project.Controllers
         {
             //var appleAppRequestModel = await this.context.AppleAppRequests.FindAsync(id);
             //this.context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-            var appleAppRequestModel = await this.context.AppleAppRequests.Include(request => request.RequestedApplications).Include(request => request.RequestedDevices).FirstOrDefaultAsync(request  => request.Id == id);
+            var appleAppRequestModel = await this.context.AppleAppRequests.Include(request => request.RequestedApplications).Include(request => request.RequestedDevices).FirstOrDefaultAsync(request => request.Id == id);
 
             if (appleAppRequestModel == null || appleAppRequestModel.IsActive == false)
             {
@@ -93,6 +93,12 @@ namespace my_playground_project.Controllers
                 {
                     var newAppleAppApplication = new AppleAppApplicationModel { Name = requestedApplication.Name, ReferenceId = Guid.NewGuid().ToString() };
                     this.context.AppleAppApplications.Add(newAppleAppApplication);
+                }
+
+                if (!this.context.AppleAppVendors.Any(v => v.Name.ToUpper() == requestedApplication.Vendor.ToUpper()))
+                {
+                    var newAppleAppVendor = new AppleAppVendorModel { Name = requestedApplication.Vendor, ReferenceId = Guid.NewGuid().ToString() };
+                    this.context.AppleAppVendors.Add(newAppleAppVendor);
                 }
             });
 
