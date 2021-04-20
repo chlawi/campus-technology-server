@@ -84,7 +84,7 @@ namespace my_playground_project.Controllers
 
         // DELETE: api/AppleAppApproverApi/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAppleAppApproverModel(long id)
+        public async Task<IActionResult> DeleteAppleAppApproverModel(int id)
         {
             var appleAppApproverModel = await _context.AppleAppApprovers.FindAsync(id);
             if (appleAppApproverModel == null)
