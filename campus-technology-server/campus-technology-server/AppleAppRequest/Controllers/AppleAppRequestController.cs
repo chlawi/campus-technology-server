@@ -28,18 +28,26 @@ namespace my_playground_project.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppleAppRequestListView>>> GetAppleAppRequests()
         {
-            return Mapper.Map<AppleAppRequestListView[]>(await this.context.AppleAppRequests.Where(request => request.IsActive == true).ToListAsync());
+            return Mapper.Map<AppleAppRequestListView[]>(await this.context.AppleAppRequests.Where(request => request.IsActive == true).OrderByDescending(request => request.Id).ToListAsync());
         }
 
         // GET: api/AppleAppRequest/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<AppleAppRequestModel>> GetAppleAppRequestModel(int id)
+        public async Task<ActionResult<AppleAppRequestModel>> GetAppleAppRequestModel(int id, string referenceId = null)
         {
+            AppleAppRequestModel appleAppRequestModel = null;
             //var appleAppRequestModel = await this.context.AppleAppRequests.FindAsync(id);
             //this.context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
-            var appleAppRequestModel = await this.context.AppleAppRequests.Include(request => request.RequestedApplications).Include(request => request.RequestedDevices).FirstOrDefaultAsync(request => request.Id == id);
+            if (referenceId != null)
+            {
+                appleAppRequestModel = await this.context.AppleAppRequests.Include(request => request.RequestedApplications).Include(request => request.RequestedDevices).FirstOrDefaultAsync(request => request.ReferenceId == referenceId && request.IsActive == true);
+            }
+            else
+            {
+                appleAppRequestModel = await this.context.AppleAppRequests.Include(request => request.RequestedApplications).Include(request => request.RequestedDevices).FirstOrDefaultAsync(request => request.Id == id && request.IsActive == true);
+            }
 
-            if (appleAppRequestModel == null || appleAppRequestModel.IsActive == false)
+            if (appleAppRequestModel == null)
             {
                 return NotFound();
             }
