@@ -1,6 +1,7 @@
 ﻿using AppleAppRequest.Models;
 using AutoMapper;
 using campus_technology_server.AppleAppRequest;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -57,6 +58,11 @@ namespace my_playground_project.Controllers
             return appleAppRequestModel;
         }
 
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PatchAppleAppRequestModel(int id, [FromBody] JsonPatchDocument< AppleAppRequestModel> appleAppRequestModel)
+        {
+            return NoContent();
+        }
         // PUT: api/AppleAppRequest/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
