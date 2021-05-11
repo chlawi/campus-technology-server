@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace my_playground_project.Controllers
+namespace AppleAppRequest.Controllers
 {
     [Route("v1/apple-app-requests")]
     [ApiController]
@@ -59,8 +59,18 @@ namespace my_playground_project.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchAppleAppRequestModel(int id, [FromBody] JsonPatchDocument< AppleAppRequestModel> appleAppRequestModel)
+        public async Task<IActionResult> PatchAppleAppRequestModel(int id, [FromBody] JsonPatchDocument< AppleAppRequestModel> patchDocument)
         {
+            var appleAppRequest = await this.context.AppleAppRequests.Include(request => request.RequestedApplications).Include(request => request.RequestedDevices).FirstOrDefaultAsync(request => request.Id == id);
+            patchDocument.ApplyTo(appleAppRequest, ModelState);
+
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            await this.context.SaveChangesAsync();
+
             return NoContent();
         }
         // PUT: api/AppleAppRequest/5
