@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace my_playground_project.Controllers
+namespace AppleAppRequest.Controllers
 {
     [Route("v1/apple-app-reject-reasons")]
     [ApiController]
