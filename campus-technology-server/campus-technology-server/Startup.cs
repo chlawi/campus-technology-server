@@ -32,7 +32,7 @@ namespace campus_technology_server
             services.AddDbContext<AppleAppRequestContext>(opt =>
               opt.UseSqlServer(Configuration.GetConnectionString("AppleApp"))
                  .EnableSensitiveDataLogging()
-                 .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking));
+                 .UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll));
 
             services.AddSingleton<IAppleAppRequestService, AppleAppRequestService>();
 

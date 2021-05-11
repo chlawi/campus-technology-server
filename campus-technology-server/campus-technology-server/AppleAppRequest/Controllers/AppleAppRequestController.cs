@@ -59,17 +59,39 @@ namespace AppleAppRequest.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> PatchAppleAppRequestModel(int id, [FromBody] JsonPatchDocument< AppleAppRequestModel> patchDocument)
+        public async Task<IActionResult> PatchAppleAppRequestModel(int id, [FromBody] JsonPatchDocument<AppleAppRequestModel> patchDocument)
         {
             var appleAppRequest = await this.context.AppleAppRequests.Include(request => request.RequestedApplications).Include(request => request.RequestedDevices).FirstOrDefaultAsync(request => request.Id == id);
             patchDocument.ApplyTo(appleAppRequest, ModelState);
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await this.context.SaveChangesAsync();
+            //this.context.Entry(appleAppRequest).State = EntityState.Modified;
+
+            try
+            {
+
+                await this.context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+
+                if (!AppleAppRequestModelExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Write("Error");
+            }
 
             return NoContent();
         }
