@@ -10,8 +10,8 @@ namespace AppleAppRequest.Models
         public SubscriptionType SubscriptionType { get; set; }
         public DateTime? CompletionDate { get; set; }
         public int? RejectReasonId { get; set; }
-        public ICollection<AppleAppRequestedApplicationModel> RequestedApplications { get; set; }
-        public ICollection<AppleAppRequestedDeviceModel> RequestedDevices { get; set; }
+        public IList<AppleAppRequestedApplicationModel> RequestedApplications { get; set; }
+        public IList<AppleAppRequestedDeviceModel> RequestedDevices { get; set; }
     }
 
     public enum SubscriptionType
