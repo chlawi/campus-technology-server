@@ -77,6 +77,7 @@ namespace AppleAppRequest.Controllers
         public async Task<ActionResult<AppleAppAdministratorModel>> PostAppleAppAdministratorModel(AppleAppAdministratorModel appleAppAdministratorModel)
         {
             context.AppleAppAdministrators.Add(appleAppAdministratorModel);
+
             await context.SaveChangesAsync();
 
             return CreatedAtAction("GetAppleAppAdministratorModel", new { id = appleAppAdministratorModel.Id }, appleAppAdministratorModel);
@@ -92,8 +93,7 @@ namespace AppleAppRequest.Controllers
                 return NotFound();
             }
 
-            appleAppAdministratorModel.IsActive = false;
-            context.AppleAppAdministrators.Update(appleAppAdministratorModel);
+            context.AppleAppAdministrators.Remove(appleAppAdministratorModel);
             await context.SaveChangesAsync();
 
             return NoContent();
