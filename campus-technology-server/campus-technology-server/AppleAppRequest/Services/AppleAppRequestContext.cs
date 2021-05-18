@@ -1,5 +1,6 @@
 ﻿using AppleAppRequest.Models;
 using Microsoft.EntityFrameworkCore;
+using Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,8 @@ namespace campus_technology_server.AppleAppRequest
         public DbSet<AppleAppRejectReasonModel> AppleAppRejectReasons { get; set; }
         public DbSet<AppleAppRequestedApplicationModel> AppleAppRequestedApplications{ get; set; }
         public DbSet<AppleAppRequestedDeviceModel> AppleAppRequestedDevices { get; set; }
+        public DbSet<AppleAppAdministratorModel> AppleAppAdministrators { get; set; }
+        public DbSet<ManagerModel> Managers{ get; set; }
+
     }
 }
