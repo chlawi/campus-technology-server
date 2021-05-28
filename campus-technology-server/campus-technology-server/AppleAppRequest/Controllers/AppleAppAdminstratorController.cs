@@ -1,5 +1,6 @@
 ﻿using AppleAppRequest.Models;
 using campus_technology_server.AppleAppRequest;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -8,8 +9,9 @@ using System.Threading.Tasks;
 
 namespace AppleAppRequest.Controllers
 {
-    [Route("v1/apple-app-administrators")]
     [ApiController]
+    [Authorize]
+    [Route("v1/apple-app-administrators")]
     public class AppleAppAdminstratorController : ControllerBase
     {
         private readonly AppleAppRequestContext context;
@@ -102,6 +104,14 @@ namespace AppleAppRequest.Controllers
         private bool AppleAppAdministratorModelExists(long id)
         {
             return context.AppleAppAdministrators.Any(e => e.Id == id);
+        }
+
+        [HttpGet]
+        [Route("IsUserAnAdministrator")]
+        public async Task<IActionResult> DetermineIfCurrentUserIsAnAdministrator()
+        {
+            var result = await this.context.AppleAppAdministrators.AnyAsync(administrator => administrator.UserId.ToUpper() == this.User.Identity.Name.ToUpper());
+            return Ok(result);
         }
     }
 }
